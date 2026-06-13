@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt | Designeca</title>
+  <meta name="description" content="Kontaktirajte Designeca digitalni studio za izradu modernog web sajta, landing stranice, prezentacije usluga ili interaktivne pozivnice.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Glavna navigacija">
+      <a class="logo" href="index.html"><img src="img/designeca-logo.png" alt="Designeca"></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span><span class="sr-only">Otvori navigaciju</span></button>
+      <div class="nav-menu" id="navMenu"><a href="index.html">Početna</a><a href="usluge.html">Usluge</a><a href="cenovnik.html">Cenovnik</a><a class="active" href="kontakt.html">Kontakt</a></div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container narrow reveal">
+        <p class="eyebrow">Kontakt</p>
+        <h1>Recite nam šta želite da napravimo, a mi ćemo predložiti jasan sledeći korak.</h1>
+        <p>Radimo sa malim biznisima, preduzetnicima, uslužnim delatnostima i organizatorima događaja koji žele profesionalan web nastup.</p>
+      </div>
+    </section>
+
+    <section class="section contact-section">
+      <div class="container contact-grid">
+        <form class="contact-form reveal" action="#" method="post">
+          <label for="name">Ime i prezime</label>
+          <input id="name" name="name" type="text" placeholder="Vaše ime" required>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="vas@email.com" required>
+          <label for="service">Tip projekta</label>
+          <select id="service" name="service">
+            <option>Sajt za biznis</option>
+            <option>Lični sajt</option>
+            <option>Interaktivna pozivnica</option>
+          </select>
+          <label for="message">Poruka</label>
+          <textarea id="message" name="message" rows="6" placeholder="Ukratko opišite projekat, rok i šta vam je najvažnije."></textarea>
+          <button class="btn btn-primary" type="submit">Pošaljite upit</button>
+          <p class="form-note">Forma je pripremljena za povezivanje sa backend-om ili email servisom.</p>
+        </form>
+
+        <aside class="contact-card reveal">
+          <p class="eyebrow">Direktan kontakt</p>
+          <h2>Hajde da razjasnimo šta vam je potrebno.</h2>
+          <p>Pošaljite nam osnovne informacije o biznisu, usluzi ili događaju. Pomažemo da se ideja pretvori u pregledan sajt koji klijenti mogu lako da razumeju.</p>
+          <div class="contact-links">
+            <a href="mailto:hello@designeca.com"><span>Email</span>hello@designeca.com</a>
+            <a href="#"><span>LinkedIn</span>linkedin.com/company/designeca</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid"><div><a class="logo" href="index.html"><img src="img/designeca-logo.png" alt="Designeca"></a><p>Dizajniramo i izrađujemo moderne web sajtove za male biznise, usluge i događaje.</p></div><div><h2>Navigacija</h2><a href="usluge.html">Usluge</a><a href="cenovnik.html">Cenovnik</a><a href="kontakt.html">Kontakt</a></div><div><h2>Kontakt</h2><a href="mailto:hello@designeca.com">hello@designeca.com</a><a href="kontakt.html">Pošaljite upit</a></div></div>
+    <div class="container footer-bottom">© 2026 Designeca. Sva prava zadržana.</div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
