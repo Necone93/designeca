@@ -11,6 +11,7 @@ const translations = {
   "Designeca početna": "Designeca home",
   "Izbor jezika": "Language selection",
   "Mockupovi izrađenih sajtova": "Website mockups",
+  "Izdvojeni projekti": "Selected projects",
   "Horizontalni prikaz mockupova": "Horizontal mockup preview",
   "Mockup sajta Abraxas Cattery": "Abraxas Cattery website mockup",
   "Mockup sajta Designeca 1": "Designeca website mockup 1",
@@ -18,9 +19,26 @@ const translations = {
   "Mockup sajta Designeca 3": "Designeca website mockup 3",
   "Mockup sajta Designeca 4": "Designeca website mockup 4",
   "Mockup sajta": "Website mockup",
+  "Vidi sajt": "View website",
+  "Vidi sajt Abraxas Cattery": "View Abraxas Cattery website",
+  "Vidi sajt Dental Grupa BiH": "View Dental Grupa BiH website",
+  "Vidi sajt EduZone": "View EduZone website",
+  "Vidi sajt Mons Medical": "View Mons Medical website",
+  "Prednosti Designeca usluge": "Benefits of Designeca services",
+  "Dizajn po meri": "Custom design",
+  "Responzivna izrada": "Responsive development",
+  "Jasna struktura": "Clear structure",
+  "Podrška nakon objave": "Post-launch support",
   "Pogledajte usluge": "View services",
   "Kontaktirajte nas": "Contact us",
   "Pošaljite upit": "Send inquiry",
+  "Zatvori formu": "Close form",
+  "Recite nam kako možemo da vam pomognemo.": "Tell us how we can help.",
+  "Ostavite email, a mi ćemo vam se javiti sa sledećim koracima.": "Leave your email and we will get back to you with the next steps.",
+  "Broj telefona": "Phone number",
+  "(opciono)": "(optional)",
+  "Ukratko opišite šta vam je potrebno.": "Briefly describe what you need.",
+  "Upit je spreman za slanje.": "Your inquiry is ready to send.",
   "Saznajte više": "Learn more",
   "Uskoro u ponudi": "Coming soon",
   "O studiju": "About the studio",
@@ -453,11 +471,65 @@ if (contactForm) {
   });
 }
 
+const inquiryModal = document.querySelector("#inquiryModal");
+const inquiryForm = document.querySelector(".inquiry-form");
+const inquiryTriggers = document.querySelectorAll(".inquiry-trigger");
+
+if (inquiryModal && inquiryForm && inquiryTriggers.length) {
+  const closeButton = inquiryModal.querySelector(".inquiry-modal-close");
+  const projectInput = inquiryForm.querySelector("#inquiryProject");
+  const emailInput = inquiryForm.querySelector("#inquiryEmail");
+  const status = inquiryForm.querySelector(".inquiry-status");
+
+  const closeInquiryModal = () => {
+    inquiryModal.close();
+    document.body.classList.remove("modal-open");
+  };
+
+  inquiryTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      inquiryForm.reset();
+      inquiryForm.classList.remove("submitted");
+      status.textContent = document.documentElement.lang === "en"
+        ? "The form is ready to be connected to a backend or email service."
+        : "Forma je pripremljena za povezivanje sa backend-om ili email servisom.";
+      projectInput.value = trigger.dataset.project || "";
+      inquiryModal.showModal();
+      document.body.classList.add("modal-open");
+      window.setTimeout(() => emailInput.focus(), 0);
+    });
+  });
+
+  closeButton.addEventListener("click", closeInquiryModal);
+  inquiryModal.addEventListener("click", (event) => {
+    if (event.target === inquiryModal) {
+      closeInquiryModal();
+    }
+  });
+  inquiryModal.addEventListener("close", () => {
+    document.body.classList.remove("modal-open");
+  });
+
+  inquiryForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!inquiryForm.reportValidity()) {
+      return;
+    }
+
+    inquiryForm.classList.add("submitted");
+    status.textContent = document.documentElement.lang === "en"
+      ? "Your inquiry is ready to send."
+      : "Upit je spreman za slanje.";
+  });
+}
+
 const mockupSlider = document.querySelector(".mockup-slider");
 
 if (mockupSlider) {
   const slides = Array.from(mockupSlider.querySelectorAll(".mockup-slide"));
   let isDragging = false;
+  let didDrag = false;
   let startX = 0;
   let activeIndex = 0;
 
@@ -467,11 +539,22 @@ if (mockupSlider) {
   const renderCarousel = () => {
     slides.forEach((slide) => {
       slide.classList.remove("prev", "active", "next");
+      const projectLink = slide.querySelector(".mockup-project-link");
+      if (projectLink) {
+        projectLink.setAttribute("tabindex", "-1");
+        projectLink.setAttribute("aria-hidden", "true");
+      }
     });
 
     slides[getPreviousIndex()].classList.add("prev");
     slides[activeIndex].classList.add("active");
     slides[getNextIndex()].classList.add("next");
+
+    const activeProjectLink = slides[activeIndex].querySelector(".mockup-project-link");
+    if (activeProjectLink) {
+      activeProjectLink.removeAttribute("tabindex");
+      activeProjectLink.removeAttribute("aria-hidden");
+    }
   };
 
   const moveCarousel = (direction) => {
@@ -481,9 +564,9 @@ if (mockupSlider) {
 
   mockupSlider.addEventListener("pointerdown", (event) => {
     isDragging = true;
+    didDrag = false;
     startX = event.clientX;
     mockupSlider.classList.add("dragging");
-    mockupSlider.setPointerCapture(event.pointerId);
   });
 
   const stopDragging = (event) => {
@@ -492,16 +575,22 @@ if (mockupSlider) {
     }
 
     const dragDistance = event.clientX - startX;
+    didDrag = Math.abs(dragDistance) > 34;
     isDragging = false;
     mockupSlider.classList.remove("dragging");
-    if (mockupSlider.hasPointerCapture(event.pointerId)) {
-      mockupSlider.releasePointerCapture(event.pointerId);
-    }
 
-    if (Math.abs(dragDistance) > 34) {
+    if (didDrag) {
       moveCarousel(dragDistance < 0 ? 1 : -1);
     }
   };
+
+  mockupSlider.querySelectorAll(".mockup-project-link").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (didDrag) {
+        event.preventDefault();
+      }
+    });
+  });
 
   slides.forEach((slide, index) => {
     slide.addEventListener("click", () => {

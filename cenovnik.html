@@ -37,7 +37,7 @@
           <strong>od 350 EUR</strong>
           <p>Za lokale, firme, ordinacije, salone i uslužne delatnosti kojima treba profesionalna prezentacija.</p>
           <ul><li>Struktura sajta</li><li>Responzivan dizajn</li><li>Kontakt i mapa</li><li>Osnovna SEO priprema</li></ul>
-          <a class="btn btn-secondary" href="kontakt.html">Pošaljite upit</a>
+          <a class="btn btn-secondary inquiry-trigger" href="kontakt.html" data-project="Sajt za biznis">Pošaljite upit</a>
         </article>
         <article class="price-card featured reveal">
           <p class="eyebrow">Lični brend</p>
@@ -45,7 +45,7 @@
           <strong>od 300 EUR</strong>
           <p>Za trenere, edukatore, fotografe, konsultante i stručnjake koji žele jasnu online prezentaciju.</p>
           <ul><li>Predstavljanje usluga</li><li>Biografija i rezultati</li><li>Paketi ili ponuda</li><li>Kontakt tok</li></ul>
-          <a class="btn btn-primary" href="kontakt.html">Pošaljite upit</a>
+          <a class="btn btn-primary inquiry-trigger" href="kontakt.html" data-project="Lični sajt">Pošaljite upit</a>
         </article>
         <article class="price-card reveal">
           <p class="eyebrow">Događaji</p>
@@ -74,6 +74,34 @@
       </div>
     </section>
   </main>
+
+  <dialog class="inquiry-modal" id="inquiryModal" aria-labelledby="inquiryTitle">
+    <div class="inquiry-modal-panel">
+      <button class="inquiry-modal-close" type="button" aria-label="Zatvori formu">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="inquiry-modal-heading">
+        <p class="eyebrow">Pošaljite upit</p>
+        <h2 id="inquiryTitle">Recite nam kako možemo da vam pomognemo.</h2>
+        <p>Ostavite email, a mi ćemo vam se javiti sa sledećim koracima.</p>
+      </div>
+      <form class="inquiry-form" action="#" method="post">
+        <input id="inquiryProject" name="project" type="hidden">
+
+        <label for="inquiryEmail">Email <span aria-hidden="true">*</span></label>
+        <input id="inquiryEmail" name="email" type="email" autocomplete="email" required>
+
+        <label for="inquiryPhone">Broj telefona <span>(opciono)</span></label>
+        <input id="inquiryPhone" name="phone" type="tel" autocomplete="tel">
+
+        <label for="inquiryMessage">Poruka <span>(opciono)</span></label>
+        <textarea id="inquiryMessage" name="message" rows="5"></textarea>
+
+        <button class="btn btn-primary" type="submit">Pošaljite upit</button>
+        <p class="form-note inquiry-status" role="status" aria-live="polite">Forma je pripremljena za povezivanje sa backend-om ili email servisom.</p>
+      </form>
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <div class="container footer-grid"><div><a class="logo" href="index.html"><img src="img/designeca-logo.png" alt="Designeca"></a><p>Dizajniramo i izrađujemo moderne web sajtove za male biznise, usluge i događaje.</p></div><div><h2>Navigacija</h2><a href="usluge.html">Usluge</a><a href="cenovnik.html">Cenovnik</a><a href="kontakt.html">Kontakt</a></div><div><h2>Kontakt</h2><a href="mailto:hello@designeca.com">hello@designeca.com</a><a href="kontakt.html">Pošaljite upit</a></div></div>
