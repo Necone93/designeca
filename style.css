@@ -210,21 +210,26 @@ svg {
 /* Home hero and visual mockup */
 .hero {
   position: relative;
+  display: flex;
+  align-items: center;
+  min-height: calc(100dvh - 117px);
   overflow: hidden;
-  padding: 62px 0 82px;
+  padding: 72px 0 110px;
   border-bottom: 0;
   background:
     linear-gradient(90deg, rgba(23, 63, 72, 0.04) 1px, transparent 1px) center top / 25% 100%,
     linear-gradient(135deg, rgba(31, 111, 120, 0.20), transparent 34%),
     linear-gradient(300deg, rgba(200, 111, 69, 0.10), transparent 42%),
     linear-gradient(180deg, rgba(251, 252, 248, 0.98), rgba(227, 238, 235, 0.92));
+  background-size: 25% 100%, 140% 140%, 140% 140%, 100% 100%;
+  animation: hero-mesh-shift 10s ease-in-out infinite alternate;
 }
 
 .hero::before {
   content: "DESIGNECA";
   position: absolute;
   left: max(18px, calc((100% - var(--container)) / 2));
-  bottom: -32px;
+  bottom: 18px;
   color: rgba(23, 63, 72, 0.045);
   font-size: 132px;
   font-weight: 800;
@@ -234,13 +239,169 @@ svg {
 }
 
 .hero::after {
-  content: none;
+  content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 1px;
-  background: transparent;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 24%, rgba(255, 255, 255, 0.68) 48%, transparent 72%);
+  transform: translateX(-100%);
+  animation: hero-light-sweep 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-ambient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-ambient::before {
+  content: none;
+}
+
+.hero-ambient span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(1px);
+  opacity: 0.72;
+  will-change: transform;
+}
+
+.hero-ambient span:nth-child(1) {
+  top: -18%;
+  right: 4%;
+  width: min(42vw, 620px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(31, 111, 120, 0.36), transparent 68%);
+  animation: hero-float-one 9s ease-in-out infinite alternate;
+}
+
+.hero-ambient span:nth-child(2) {
+  bottom: -32%;
+  left: 18%;
+  width: min(38vw, 540px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(200, 111, 69, 0.24), transparent 68%);
+  animation: hero-float-two 11s ease-in-out infinite alternate;
+}
+
+.hero-logo-build {
+  position: absolute;
+  top: 50%;
+  right: max(5%, calc((100% - var(--container)) / 2));
+  width: clamp(190px, 23vw, 330px);
+  height: auto;
+  overflow: visible;
+  transform: translateY(-55%);
+  filter: drop-shadow(0 28px 44px rgba(23, 63, 72, 0.14));
+}
+
+.hero-logo-build .logo-layer {
+  opacity: 0;
+  transform: translateY(36px);
+  transform-origin: center;
+  will-change: opacity, transform;
+}
+
+.hero-logo-build .logo-layer-base {
+  fill: var(--text);
+  animation: logo-build-base 5.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.hero-logo-build .logo-layer-middle {
+  fill: var(--cool);
+  animation: logo-build-middle 5.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.hero-logo-build .logo-layer-top {
+  fill: var(--text);
+  animation: logo-build-top 5.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.hero-scroll {
+  position: absolute;
+  right: max(18px, calc((100% - var(--container)) / 2));
+  bottom: 28px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--cool-dark);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-scroll i {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 42px;
+  overflow: hidden;
+  background: rgba(31, 111, 120, 0.24);
+}
+
+.hero-scroll i::after {
+  position: absolute;
+  inset: 0;
+  background: var(--cool);
+  animation: hero-scroll-line 2s ease-in-out infinite;
+  content: "";
+}
+
+@keyframes hero-light-sweep {
+  0%, 35% {
+    transform: translateX(-100%);
+  }
+  65%, 100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes hero-mesh-shift {
+  to {
+    background-position: center top, 28% 18%, 72% 84%, center;
+  }
+}
+
+@keyframes hero-float-one {
+  to {
+    transform: translate(-10%, 12%) scale(1.12);
+  }
+}
+
+@keyframes hero-float-two {
+  to {
+    transform: translate(14%, -10%) scale(0.9);
+  }
+}
+
+@keyframes logo-build-base {
+  0%, 5%, 100% { opacity: 0; transform: translateY(42px); }
+  14%, 82% { opacity: 1; transform: translateY(0); }
+  92% { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes logo-build-middle {
+  0%, 14%, 100% { opacity: 0; transform: translateY(42px); }
+  25%, 82% { opacity: 1; transform: translateY(0); }
+  92% { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes logo-build-top {
+  0%, 25%, 100% { opacity: 0; transform: translateY(42px); }
+  36%, 82% { opacity: 1; transform: translateY(0); }
+  92% { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes hero-scroll-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  50%, 100% {
+    transform: translateY(100%);
+  }
 }
 
 .hero-grid,
@@ -264,24 +425,47 @@ svg {
 .hero-centered .hero-content {
   max-width: 1180px;
   margin: 0 auto;
-  padding-top: 0;
+  padding: 0 clamp(220px, 27vw, 360px) 0 0;
   border-top: 0;
   text-align: left;
 }
 
+.hero-content h1 {
+  animation: hero-copy-in 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-content .hero-text {
+  animation: hero-copy-in 900ms 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-content .hero-actions {
+  animation: hero-copy-in 900ms 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero-centered .hero-text {
-  max-width: 680px;
-  margin: 30px 0 0 auto;
-  padding: 22px 0 0;
+  max-width: 620px;
+  margin: 22px 0 0;
+  padding: 18px 0 0;
   border-top: 1px solid rgba(31, 111, 120, 0.34);
   font-size: clamp(18px, 2vw, 22px);
   line-height: 1.55;
 }
 
 .hero-centered .hero-actions {
-  justify-content: flex-end;
+  justify-content: flex-start;
   max-width: 680px;
-  margin-left: auto;
+  margin-left: 0;
 }
 
 .eyebrow {
@@ -383,8 +567,14 @@ h3 {
   border-top: 0;
 }
 
+.projects-showcase {
+  scroll-margin-top: 88px;
+  padding: 64px 0 72px;
+  background: linear-gradient(180deg, rgba(251, 252, 248, 0.74), rgba(227, 238, 235, 0.72));
+}
+
 .mockup-section-heading {
-  margin-top: 82px;
+  margin-top: 0;
 }
 
 .mockup-section-heading .eyebrow {
@@ -393,8 +583,8 @@ h3 {
 
 .mockup-slider {
   position: relative;
-  height: min(62vh, 560px);
-  min-height: 430px;
+  height: min(52vh, 470px);
+  min-height: 380px;
   overflow: hidden;
   cursor: grab;
   user-select: none;
@@ -455,7 +645,7 @@ h3 {
 .mockup-slide img {
   display: block;
   width: 100%;
-  height: min(58vh, 520px);
+  height: min(48vh, 440px);
   object-fit: contain;
   object-position: top center;
   pointer-events: none;
@@ -697,6 +887,10 @@ h3 {
 .section {
   padding: 86px 0;
   border-bottom: 1px solid rgba(31, 111, 120, 0.10);
+}
+
+.hero ~ .section {
+  padding: 68px 0;
 }
 
 .section-heading {
@@ -1446,7 +1640,8 @@ body.modal-open {
 
 @media (min-width: 1040px) {
   h1 {
-    font-size: 94px;
+    font-size: clamp(68px, 5.5vw, 80px);
+    line-height: 0.96;
   }
 
   h2 {
@@ -1454,7 +1649,7 @@ body.modal-open {
   }
 
   .hero {
-    padding-top: 86px;
+    padding-top: 58px;
   }
 
   .services-grid,
@@ -1491,12 +1686,31 @@ body.modal-open {
     padding-top: 54px;
   }
 
+  .hero {
+    min-height: calc(100dvh - 105px);
+    padding-bottom: 92px;
+  }
+
   .hero::before {
     font-size: 58px;
-    bottom: -12px;
+    bottom: 22px;
+  }
+
+  .hero-scroll {
+    right: 18px;
+    bottom: 20px;
+  }
+
+  .hero-scroll span {
+    display: none;
+  }
+
+  .projects-showcase {
+    padding: 48px 0 54px;
   }
 
   .hero-centered .hero-content {
+    padding-right: 0;
     text-align: left;
   }
 
@@ -1511,21 +1725,30 @@ body.modal-open {
     margin-left: 0;
   }
 
+  .hero-logo-build {
+    top: auto;
+    right: 22px;
+    bottom: 25px;
+    width: 82px;
+    transform: none;
+    filter: none;
+  }
+
   .mockup-showcase {
     margin-top: 22px;
   }
 
   .mockup-section-heading {
-    margin-top: 54px;
+    margin-top: 0;
   }
 
   .mockup-slider {
-    height: 430px;
-    min-height: 430px;
+    height: 390px;
+    min-height: 390px;
   }
 
   .mockup-slide img {
-    height: 400px;
+    height: 365px;
   }
 
   .mockup-slide {
@@ -1632,6 +1855,22 @@ body.modal-open {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero::after,
+  .hero-ambient span,
+  .hero-logo-build .logo-layer,
+  .hero-scroll i::after {
+    animation: none;
+  }
+
+  .hero-logo-build .logo-layer {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero::after {
+    display: none;
+  }
+
   .marquee-track {
     width: auto;
     animation: none;

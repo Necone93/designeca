@@ -50,10 +50,13 @@ const translations = {
   "Zašto se izdvajamo": "Why we stand out",
   "Sajt izrađen namenski, ne iz šablona.": "A purpose-built website, not a template.",
   "Bez gotovih tema": "No ready-made themes",
+  "Dizajn prilagođavamo vašem brendu i ciljevima.": "We tailor the design to your brand and goals.",
   "Ne koristimo podrazumevane teme, generičke šablone niti brz pristup izrade sajta samo da bi što pre bio online.": "We do not use default themes, generic templates or a rushed website process just to get something online quickly.",
   "Gradimo od početka": "Built from the ground up",
+  "Svaki detalj ima jasnu funkciju i razlog.": "Every detail has a clear function and purpose.",
   "Svaki sajt planiramo i izrađujemo od nule, prema vašem biznisu, ponudi, publici i cilju koji sajt treba da ispuni.": "Every website is planned and built from scratch around your business, offer, audience and the goal the website needs to achieve.",
   "Temeljna priprema": "Thorough preparation",
+  "Dizajn potvrđujete pre nego što počne izrada.": "You approve the design before development begins.",
   "Pre programiranja definišemo strukturu i vizuelni pravac, šaljemo dizajn na proveru i tek nakon odobrenja krećemo u izradu.": "Before development, we define the structure and visual direction, send the design for review and start building only after approval.",
   "Tri ponude koje pokrivaju najčešće potrebe klijenata": "Three offers that cover the most common client needs",
   "Sajtovi za biznise": "Business websites",
@@ -530,10 +533,12 @@ const mockupSlider = document.querySelector(".mockup-slider");
 
 if (mockupSlider) {
   const slides = Array.from(mockupSlider.querySelectorAll(".mockup-slide"));
+  const autoplayDelay = 3800;
   let isDragging = false;
   let didDrag = false;
   let startX = 0;
   let activeIndex = 0;
+  let autoplayTimer;
 
   const getPreviousIndex = () => (activeIndex - 1 + slides.length) % slides.length;
   const getNextIndex = () => (activeIndex + 1) % slides.length;
@@ -564,7 +569,27 @@ if (mockupSlider) {
     renderCarousel();
   };
 
+  const stopAutoplay = () => {
+    window.clearInterval(autoplayTimer);
+  };
+
+  const startAutoplay = () => {
+    stopAutoplay();
+
+    const pointerIsHovering = window.matchMedia("(hover: hover)").matches && mockupSlider.matches(":hover");
+
+    if (
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      && !document.hidden
+      && !pointerIsHovering
+      && !mockupSlider.matches(":focus-within")
+    ) {
+      autoplayTimer = window.setInterval(() => moveCarousel(1), autoplayDelay);
+    }
+  };
+
   mockupSlider.addEventListener("pointerdown", (event) => {
+    stopAutoplay();
     isDragging = true;
     didDrag = false;
     startX = event.clientX;
@@ -584,6 +609,8 @@ if (mockupSlider) {
     if (didDrag) {
       moveCarousel(dragDistance < 0 ? 1 : -1);
     }
+
+    startAutoplay();
   };
 
   mockupSlider.querySelectorAll(".mockup-project-link").forEach((link) => {
@@ -610,5 +637,17 @@ if (mockupSlider) {
 
   mockupSlider.addEventListener("pointerup", stopDragging);
   mockupSlider.addEventListener("pointercancel", stopDragging);
+  mockupSlider.addEventListener("mouseenter", stopAutoplay);
+  mockupSlider.addEventListener("mouseleave", startAutoplay);
+  mockupSlider.addEventListener("focusin", stopAutoplay);
+  mockupSlider.addEventListener("focusout", startAutoplay);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopAutoplay();
+    } else {
+      startAutoplay();
+    }
+  });
   renderCarousel();
+  startAutoplay();
 }
