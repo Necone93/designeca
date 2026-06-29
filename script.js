@@ -316,12 +316,6 @@ const pageMeta = {
     enDescription: "We design digital and interactive invitations for weddings, birthdays, celebrations, graduations and events with RSVP forms, maps and countdowns.",
     srDescription: "Dizajniramo digitalne i interaktivne pozivnice za venčanja, rođendane, proslave, mature i događaje sa RSVP formom, mapom i odbrojavanjem."
   },
-  "portfolio.html": {
-    enTitle: "Website Design Portfolio | Designeca",
-    srTitle: "Portfolio izrađenih web sajtova | Designeca",
-    enDescription: "Explore Designeca's portfolio of business and service websites for companies in education, healthcare and professional services.",
-    srDescription: "Pogledajte Designeca portfolio poslovnih i prezentacionih web sajtova. Izdvojeni projekti za biznise, edukaciju, zdravstvo i usluge."
-  }
 };
 
 const reverseTranslations = Object.fromEntries(
