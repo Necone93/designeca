@@ -18,6 +18,8 @@ const translations = {
   "Mockup sajta Designeca 2": "Designeca website mockup 2",
   "Mockup sajta Designeca 3": "Designeca website mockup 3",
   "Mockup sajta Designeca 4": "Designeca website mockup 4",
+  "Mockup showcase sajta Apetit": "Apetit showcase website mockup",
+  "Vidi showcase sajt Apetit": "View Apetit showcase website",
   "Mockup sajta": "Website mockup",
   "Vidi sajt": "View website",
   "Vidi sajt Abraxas Cattery": "View Abraxas Cattery website",
