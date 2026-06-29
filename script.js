@@ -85,6 +85,7 @@ const translations = {
   "© 2026 Designeca. Sva prava zadržana.": "© 2026 Designeca. All rights reserved.",
   "Sva prava zadržana.": "All rights reserved.",
   "Web usluge za biznise, usluge, kampanje i posebne događaje.": "Web services for businesses, services, campaigns and special events.",
+  "Izrada web sajtova i digitalnih rešenja za vaš biznis.": "Website development and digital solutions for your business.",
   "Dizajniramo i izrađujemo digitalna rešenja koja imaju urednu strukturu, prepoznatljiv vizuelni pravac i jasan put ka kontaktu.": "We design and build digital solutions with a clear structure, recognizable visual direction and a direct path to contact.",
   "Ponuda": "Offer",
   "Glavne usluge koje izrađujemo": "Main services we create",
@@ -98,6 +99,7 @@ const translations = {
   "Niste sigurni šta vam treba?": "Not sure what you need?",
   "Pošaljite nam kratak opis, a mi ćemo predložiti najpraktičniji format.": "Send us a short description and we will suggest the most practical format.",
   "Orijentacione cene za najčešće tipove projekata.": "Indicative prices for the most common project types.",
+  "Cena izrade web sajta za najčešće tipove projekata.": "Website development prices for the most common project types.",
   "Svaki projekat procenjujemo prema obimu, sadržaju, rokovima i funkcionalnostima. Cene služe kao početni okvir za razgovor.": "Each project is estimated based on scope, content, timeline and functionality. Prices are a starting point for discussion.",
   "Biznis": "Business",
   "od 350 EUR": "from 350 EUR",
@@ -133,6 +135,7 @@ const translations = {
   "Održavanje sajta": "Website maintenance",
   "Održavanje sajta je opciono. Mesečno održavanje, manje izmene i osnovna tehnička podrška koštaju 30 EUR mesečno.": "Website maintenance is optional. Monthly maintenance, small updates and basic technical support cost 30 EUR per month.",
   "Recite nam šta želite da napravimo, a mi ćemo predložiti jasan sledeći korak.": "Tell us what you want to build, and we will suggest a clear next step.",
+  "Zatražite ponudu za izradu web sajta.": "Request a website development quote.",
   "Radimo sa malim biznisima, preduzetnicima, uslužnim delatnostima i organizatorima događaja koji žele profesionalan web nastup.": "We work with small businesses, entrepreneurs, service providers and event organizers who want a professional web presence.",
   "Ime i prezime": "Full name",
   "Email": "Email",
@@ -147,6 +150,7 @@ const translations = {
   "Hajde da razjasnimo šta vam je potrebno.": "Let’s clarify what you need.",
   "Pošaljite nam osnovne informacije o biznisu, usluzi ili događaju. Pomažemo da se ideja pretvori u pregledan sajt koji klijenti mogu lako da razumeju.": "Send us the basic information about your business, service or event. We help turn the idea into a clear website that clients can easily understand.",
   "Poslovni sajt koji jasno predstavlja ko ste, šta radite i kako klijenti dolaze do vas.": "A business website that clearly presents who you are, what you do and how clients reach you.",
+  "Izrada poslovnog sajta koji klijentima jasno predstavlja vaš biznis.": "A business website that clearly presents your company to potential clients.",
   "Izrađujemo web sajtove za firme, male biznise, lokale, odgajivačnice, ordinacije, salone, restorane i druge delatnosti kojima je potreban profesionalan online nastup.": "We build websites for companies, small businesses, venues, catteries, clinics, salons, restaurants and other industries that need a professional online presence.",
   "Kome je namenjeno": "Who it is for",
   "Za biznise koji žele da budu lako pronađeni i ozbiljno predstavljeni.": "For businesses that want to be easy to find and professionally presented.",
@@ -179,6 +183,7 @@ const translations = {
   "Pošaljite nam nekoliko informacija o biznisu, a mi ćemo predložiti strukturu sajta.": "Send us a few details about the business and we will suggest the website structure.",
   "Prezentacija usluga": "Service presentation",
   "Sajt koji vaše usluge pretvara u jasnu, preglednu i uverljivu online ponudu.": "A website that turns your services into a clear, organized and convincing online offer.",
+  "Izrada sajta koji vaše usluge pretvara u jasnu i uverljivu online ponudu.": "A website that turns your services into a clear and convincing online offer.",
   "Dizajniramo sajtove za lične brendove, trenere, fotografe, edukatore, konsultante, kozmetičke salone, stomatološke ordinacije i sve koji žele da predstave svoje usluge.": "We design websites for personal brands, trainers, photographers, educators, consultants, beauty salons, dental clinics and everyone who wants to present their services.",
   "Za stručnjake i uslužne biznise kojima je važno poverenje.": "For experts and service businesses where trust matters.",
   "Pomažemo da se usluge predstave tako da posetilac razume vrednost, proces rada i sledeći korak.": "We help present services so visitors understand the value, work process and next step.",
@@ -249,6 +254,9 @@ const translations = {
   "Izrađujemo pozivnicu koja izgleda svečano, učitava se brzo i lako se deli.": "We create an invitation that looks festive, loads quickly and is easy to share.",
   "Portfolio": "Portfolio",
   "Izdvojeni projekti i koncepti koje koristimo za predstavljanje različitih tipova biznisa.": "Selected projects and concepts we use to present different types of businesses.",
+  "Portfolio web sajtova izrađenih za različite tipove biznisa.": "A portfolio of websites built for different types of businesses.",
+  "Izrada web sajtova koji jasno predstavljaju vaš biznis": "Website development that clearly presents your business",
+  "Dizajniramo brze i responzivne web sajtove po meri koji grade poverenje i olakšavaju potencijalnim klijentima da vas kontaktiraju.": "We design fast, responsive custom websites that build trust and make it easy for potential clients to contact you.",
   "Svaki projekat posmatramo kroz cilj klijenta, jasnoću poruke i način na koji posetilac dolazi do kontakta.": "We view every project through the client’s goal, message clarity and the way visitors reach contact.",
   "Web prezentacija": "Web presentation",
   "Elegantna prezentacija odgajivačnice sa fokusom na poverenje, informacije o rasama, galeriju i jednostavan kontakt.": "An elegant cattery presentation focused on trust, breed information, gallery and simple contact.",
@@ -267,40 +275,40 @@ const translations = {
 
 const pageMeta = {
   "index.html": {
-    enTitle: "Designeca | Modern websites for businesses and events",
-    srTitle: "Designeca | Moderni web sajtovi za biznise i događaje",
-    enDescription: "Designeca designs and builds modern, responsive websites, landing pages and digital solutions for small businesses, services and events.",
-    srDescription: "Designeca dizajnira i izrađuje moderne, responzivne web sajtove, landing stranice i digitalna rešenja za male biznise, usluge i događaje."
+    enTitle: "Website Development for Businesses | Designeca",
+    srTitle: "Izrada web sajtova za biznise | Designeca",
+    enDescription: "Custom modern websites for small businesses, companies and entrepreneurs. Responsive design, a clear offer and an easier path to contact.",
+    srDescription: "Izrada modernih web sajtova po meri za male biznise, firme i preduzetnike. Responzivan dizajn, jasna ponuda i lakši put klijenata do kontakta."
   },
   "usluge.html": {
-    enTitle: "Services | Designeca",
-    srTitle: "Usluge | Designeca",
-    enDescription: "Designeca services: business websites, service presentations, landing pages, redesign and website maintenance. Interactive invitations coming soon.",
-    srDescription: "Designeca usluge: sajtovi za biznis, prezentacija usluga, landing stranice, redizajn i održavanje sajtova. Interaktivne pozivnice uskoro u ponudi."
+    enTitle: "Website Development Services | Designeca",
+    srTitle: "Usluge izrade web sajtova | Designeca",
+    enDescription: "Business websites, service websites, landing pages and website redesign. Explore Designeca website development services.",
+    srDescription: "Izrada poslovnih sajtova, sajtova za uslužne delatnosti, landing stranica i redizajn postojećih sajtova. Pogledajte Designeca web usluge."
   },
   "cenovnik.html": {
-    enTitle: "Pricing | Designeca",
-    srTitle: "Cenovnik | Designeca",
-    enDescription: "Indicative Designeca pricing for business websites, personal websites, installment payments, domain, hosting and maintenance.",
-    srDescription: "Orijentacioni cenovnik Designeca studija za sajtove za biznise, lične sajtove, plaćanje na rate, domen, hosting i održavanje."
+    enTitle: "Website Development Pricing | Designeca",
+    srTitle: "Cena izrade web sajta | Cenovnik | Designeca",
+    enDescription: "Indicative prices for business and personal websites. Custom websites from EUR 300, with payment in two installments.",
+    srDescription: "Pogledajte okvirne cene izrade web sajta za biznis i lični brend. Sajtovi po meri od 300 EUR, uz mogućnost plaćanja u dve rate."
   },
   "kontakt.html": {
-    enTitle: "Contact | Designeca",
-    srTitle: "Kontakt | Designeca",
-    enDescription: "Contact Designeca digital studio for a modern website, landing page, service presentation or digital invitation.",
-    srDescription: "Kontaktirajte Designeca digitalni studio za izradu modernog web sajta, landing stranice, prezentacije usluga ili interaktivne pozivnice."
+    enTitle: "Request a Website Quote | Designeca",
+    srTitle: "Zatražite ponudu za izradu sajta | Designeca",
+    enDescription: "Send an inquiry for a business website, service website or landing page. Receive a suggested structure, indicative price and next steps.",
+    srDescription: "Pošaljite upit za izradu poslovnog web sajta, sajta za usluge ili landing stranice. Dobićete predlog strukture, okvirnu cenu i sledeće korake."
   },
   "sajtovi-za-biznis.html": {
-    enTitle: "Business Websites | Designeca",
-    srTitle: "Sajtovi za biznis | Designeca",
-    enDescription: "We build modern business websites for companies, venues, clinics, salons, restaurants, catteries and other industries in Serbia and the region.",
-    srDescription: "Izrađujemo moderne poslovne sajtove za firme, lokale, ordinacije, salone, restorane, odgajivačnice i druge delatnosti u Srbiji i regionu."
+    enTitle: "Business Website Development | Designeca",
+    srTitle: "Izrada poslovnih web sajtova | Designeca",
+    enDescription: "Custom business websites for companies, venues, clinics, salons and other industries in Serbia and the region. Request a project estimate.",
+    srDescription: "Izrada poslovnih web sajtova po meri za firme, lokale, ordinacije, salone i druge delatnosti u Srbiji i regionu. Zatražite procenu projekta."
   },
   "prezentacija-usluga.html": {
-    enTitle: "Service Presentation Websites | Designeca",
-    srTitle: "Sajtovi za prezentaciju usluga | Designeca",
-    enDescription: "We build websites for personal brands, trainers, photographers, educators, consultants, salons and clinics that want to present their services clearly.",
-    srDescription: "Izrađujemo sajtove za lične brendove, trenere, fotografe, edukatore, konsultante, salone i ordinacije koji žele jasno da predstave svoje usluge."
+    enTitle: "Service Business Website Development | Designeca",
+    srTitle: "Izrada sajta za uslužne delatnosti | Designeca",
+    enDescription: "Websites for consultants, trainers, photographers, educators, salons, clinics and personal brands that want more qualified inquiries.",
+    srDescription: "Izrada sajtova za konsultante, trenere, fotografe, edukatore, salone, ordinacije i lične brendove koji žele više kvalitetnih upita."
   },
   "interaktivne-pozivnice.html": {
     enTitle: "Interactive Invitations | Designeca",
@@ -309,10 +317,10 @@ const pageMeta = {
     srDescription: "Dizajniramo digitalne i interaktivne pozivnice za venčanja, rođendane, proslave, mature i događaje sa RSVP formom, mapom i odbrojavanjem."
   },
   "portfolio.html": {
-    enTitle: "Portfolio | Designeca",
-    srTitle: "Portfolio | Designeca",
-    enDescription: "View selected Designeca projects: Abraxas Cattery, EduZone and a showcase project for modern service presentation.",
-    srDescription: "Pogledajte izdvojene Designeca projekte: Abraxas Cattery, EduZone i showcase projekat za modernu prezentaciju usluga."
+    enTitle: "Website Design Portfolio | Designeca",
+    srTitle: "Portfolio izrađenih web sajtova | Designeca",
+    enDescription: "Explore Designeca's portfolio of business and service websites for companies in education, healthcare and professional services.",
+    srDescription: "Pogledajte Designeca portfolio poslovnih i prezentacionih web sajtova. Izdvojeni projekti za biznise, edukaciju, zdravstvo i usluge."
   }
 };
 
