@@ -13,8 +13,11 @@ const translations = {
   "Mockupovi izrađenih sajtova": "Website mockups",
   "Izdvojeni projekti": "Selected projects",
   "Aktuelna ponuda": "Current offer",
-  "Akcija: izrada web sajta od 200 EUR, važi do 30. avgusta": "Special offer: website development from EUR 200, valid until August 30",
-  "AKCIJA • Izrada web sajta od 200€ • Važi do 30. avgusta • Pošaljite upit →": "SPECIAL OFFER • Website development from €200 • Valid until August 30 • Send an inquiry →",
+  "Akcija do 30. avgusta 2026: izrada web sajta za 200 EUR": "Special offer until August 30, 2026: website development for EUR 200",
+  "Akcija!": "Special offer!",
+  "Do 30. avgusta 2026.": "Until August 30, 2026",
+  "Izrada web sajta za 200 EUR": "Website development for EUR 200",
+  "Pošaljite upit →": "Send an inquiry →",
   "Horizontalni prikaz mockupova": "Horizontal mockup preview",
   "Mockup sajta Abraxas Cattery": "Abraxas Cattery website mockup",
   "Mockup sajta Designeca 1": "Designeca website mockup 1",
@@ -149,6 +152,10 @@ const translations = {
   "Vaše ime": "Your name",
   "Ukratko opišite projekat, rok i šta vam je najvažnije.": "Briefly describe the project, deadline and what matters most to you.",
   "Forma je pripremljena za povezivanje sa backend-om ili email servisom.": "The form is prepared for connection to a backend or email service.",
+  "Odgovaramo na upite u najkraćem roku.": "We respond to inquiries as soon as possible.",
+  "Slanje...": "Sending...",
+  "Upit je uspešno poslat. Javićemo vam se uskoro.": "Your inquiry was sent successfully. We will contact you soon.",
+  "Slanje nije uspelo. Pokušajte ponovo ili nam pišite na info@designeca.rs.": "Sending failed. Please try again or email us at info@designeca.rs.",
   "Direktan kontakt": "Direct contact",
   "Hajde da razjasnimo šta vam je potrebno.": "Let’s clarify what you need.",
   "Pošaljite nam osnovne informacije o biznisu, usluzi ili događaju. Pomažemo da se ideja pretvori u pregledan sajt koji klijenti mogu lako da razumeju.": "Send us the basic information about your business, service or event. We help turn the idea into a clear website that clients can easily understand.",
@@ -466,17 +473,50 @@ if ("IntersectionObserver" in window) {
 
 const contactForm = document.querySelector(".contact-form");
 
-// The form is static for now, so submit feedback stays client-side.
+const submitEmailForm = async (form, status) => {
+  const button = form.querySelector('button[type="submit"]');
+  const originalButtonText = button.textContent;
+  const isEnglish = document.documentElement.lang === "en";
+
+  button.disabled = true;
+  button.textContent = isEnglish ? "Sending..." : "Slanje...";
+  status.textContent = isEnglish ? "Sending..." : "Slanje...";
+  form.classList.remove("submitted");
+
+  try {
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" }
+    });
+    const result = await response.json();
+
+    if (!response.ok || result.success === "false" || result.success === false) {
+      throw new Error(result.message || "Form submission failed");
+    }
+
+    form.reset();
+    form.classList.add("submitted");
+    status.textContent = isEnglish
+      ? "Your inquiry was sent successfully. We will contact you soon."
+      : "Upit je uspešno poslat. Javićemo vam se uskoro.";
+  } catch (error) {
+    status.textContent = isEnglish
+      ? "Sending failed. Please try again or email us at info@designeca.rs."
+      : "Slanje nije uspelo. Pokušajte ponovo ili nam pišite na info@designeca.rs.";
+  } finally {
+    button.disabled = false;
+    button.textContent = originalButtonText;
+  }
+};
+
 if (contactForm) {
+  const contactStatus = contactForm.querySelector(".form-status");
+
   contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    contactForm.classList.add("submitted");
-    const button = contactForm.querySelector("button");
-    if (button) {
-      const message = "Upit je spreman za slanje";
-      button.textContent = document.documentElement.lang === "en"
-        ? "Inquiry is ready to send"
-        : message;
+    if (contactForm.reportValidity()) {
+      submitEmailForm(contactForm, contactStatus);
     }
   });
 }
@@ -502,8 +542,8 @@ if (inquiryModal && inquiryForm && inquiryTriggers.length) {
       inquiryForm.reset();
       inquiryForm.classList.remove("submitted");
       status.textContent = document.documentElement.lang === "en"
-        ? "The form is ready to be connected to a backend or email service."
-        : "Forma je pripremljena za povezivanje sa backend-om ili email servisom.";
+        ? "We respond to inquiries as soon as possible."
+        : "Odgovaramo na upite u najkraćem roku.";
       projectInput.value = trigger.dataset.project || "";
       inquiryModal.showModal();
       document.body.classList.add("modal-open");
@@ -521,16 +561,13 @@ if (inquiryModal && inquiryForm && inquiryTriggers.length) {
     document.body.classList.remove("modal-open");
   });
 
-  inquiryForm.addEventListener("submit", (event) => {
+  inquiryForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!inquiryForm.reportValidity()) {
       return;
     }
 
-    inquiryForm.classList.add("submitted");
-    status.textContent = document.documentElement.lang === "en"
-      ? "Your inquiry is ready to send."
-      : "Upit je spreman za slanje.";
+    await submitEmailForm(inquiryForm, status);
   });
 }
 
