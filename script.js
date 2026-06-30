@@ -211,7 +211,7 @@ const translations = {
   "Planiramo kontakt tok za zakazivanje, konsultacije, poziv ili direktan upit.": "We plan the contact flow for booking, consultations, calls or direct inquiries.",
   "Sekcije sajta": "Website sections",
   "Sajt može da sadrži sve što klijentu treba za odluku.": "The website can include everything a client needs to make a decision.",
-  "Hero ponuda": "Hero offer",
+  "Uvodna sekcija": "Intro section",
   "Paketi": "Packages",
   "Rezultati": "Results",
   "Dobar servisni sajt smanjuje nejasnoće i povećava kvalitet upita.": "A strong service website reduces confusion and improves inquiry quality.",
@@ -484,14 +484,18 @@ const submitEmailForm = async (form, status) => {
   form.classList.remove("submitted");
 
   try {
+    const formData = Object.fromEntries(new FormData(form).entries());
     const response = await fetch(form.action, {
       method: "POST",
-      headers: { Accept: "application/json" },
-      body: new FormData(form)
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(formData)
     });
     const result = await response.json().catch(() => ({ success: false }));
 
-    if (!response.ok || result.success !== true) {
+    if (!response.ok || ![true, "true"].includes(result.success)) {
       throw new Error(result.message || "Form submission failed");
     }
 
@@ -527,8 +531,9 @@ const inquiryTriggers = document.querySelectorAll(".inquiry-trigger");
 
 if (inquiryModal && inquiryForm && inquiryTriggers.length) {
   const closeButton = inquiryModal.querySelector(".inquiry-modal-close");
+  const inquiryTitle = inquiryModal.querySelector("#inquiryTitle");
   const projectInput = inquiryForm.querySelector("#inquiryProject");
-  const emailInput = inquiryForm.querySelector("#inquiryEmail");
+  const nameInput = inquiryForm.querySelector("#inquiryName");
   const status = inquiryForm.querySelector(".inquiry-status");
 
   const closeInquiryModal = () => {
@@ -545,9 +550,12 @@ if (inquiryModal && inquiryForm && inquiryTriggers.length) {
         ? "We respond to inquiries as soon as possible."
         : "Odgovaramo na upite u najkraćem roku.";
       projectInput.value = trigger.dataset.project || "";
+      inquiryTitle.textContent = document.documentElement.lang === "en"
+        ? `Inquiry for “${projectInput.value}”`
+        : `Upit za „${projectInput.value}“`;
       inquiryModal.showModal();
       document.body.classList.add("modal-open");
-      window.setTimeout(() => emailInput.focus(), 0);
+      window.setTimeout(() => nameInput.focus(), 0);
     });
   });
 

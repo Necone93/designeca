@@ -1035,6 +1035,11 @@ h3 {
   padding: 30px;
 }
 
+.business-includes .card,
+.service-method-cards .card {
+  padding: 30px;
+}
+
 .editorial-services {
   gap: 24px;
 }
@@ -1890,6 +1895,11 @@ body.modal-open {
   }
 
   .services-grid .card {
+    padding: 24px 20px;
+  }
+
+  .business-includes .card,
+  .service-method-cards .card {
     padding: 24px 20px;
   }
 
