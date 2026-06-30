@@ -484,10 +484,14 @@ const submitEmailForm = async (form, status) => {
   form.classList.remove("submitted");
 
   try {
+    const formData = Object.fromEntries(new FormData(form).entries());
     const response = await fetch(form.action, {
       method: "POST",
-      body: new FormData(form),
-      headers: { Accept: "application/json" }
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(formData)
     });
     const result = await response.json();
 
