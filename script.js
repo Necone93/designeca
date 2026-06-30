@@ -484,18 +484,14 @@ const submitEmailForm = async (form, status) => {
   form.classList.remove("submitted");
 
   try {
-    const formData = Object.fromEntries(new FormData(form).entries());
     const response = await fetch(form.action, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(formData)
+      headers: { Accept: "application/json" },
+      body: new FormData(form)
     });
-    const result = await response.json();
+    const result = await response.json().catch(() => ({ success: false }));
 
-    if (!response.ok || result.success === "false" || result.success === false) {
+    if (!response.ok || result.success !== true) {
       throw new Error(result.message || "Form submission failed");
     }
 

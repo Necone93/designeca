@@ -41,9 +41,8 @@
 
     <section class="section contact-section">
       <div class="container contact-grid">
-        <form class="contact-form reveal" action="https://formsubmit.co/ajax/info@designeca.rs" method="post">
-          <input name="_subject" type="hidden" value="Novi upit sa sajta Designeca">
-          <input name="_template" type="hidden" value="table">
+        <form class="contact-form reveal" action="send-mail.php" method="post">
+          <input name="subject" type="hidden" value="Novi upit sa sajta Designeca">
           <input class="form-honeypot" name="_honey" type="text" tabindex="-1" autocomplete="off">
           <label for="name">Ime i prezime</label>
           <input id="name" name="name" type="text" placeholder="Vaše ime" required>
